@@ -9,3 +9,4 @@ mod tests_disconnect;
 mod tests_mempool;
 mod tests_restart;
 mod tests_transaction;
+mod tests_wallet_added;
