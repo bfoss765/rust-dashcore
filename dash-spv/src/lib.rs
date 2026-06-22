@@ -69,6 +69,7 @@ pub mod logging;
 pub mod network;
 pub mod storage;
 pub mod sync;
+pub mod timer;
 pub mod types;
 pub mod validation;
 

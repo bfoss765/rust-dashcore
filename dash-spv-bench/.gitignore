@@ -1,0 +1,21 @@
+bench-results/
+bench-storage/
+profiles/
+
+*.lock
+
+# Local bench config (copied from .env.example).
+.env
+
+# Persistent testnet chain snapshot grown by snapshot-chain.sh (multi-GB; never committed).
+chain-data/
+
+# Transient per-peer CoW clones created by run.sh + the file that remembers their dir.
+.bench-clones.*
+.clonedir
+
+# Scenario matrix outputs (bench-scenarios.sh): generated reports/logs/compose, and the
+# bootstrapped yq binary. Reports are meant to be copied out, not committed.
+.scenario.*.yml
+results/
+.bin/

@@ -1,0 +1,4 @@
+description: "Testnet sync from a 500k checkpoint via DNS peer discovery."
+cpus: "0-11"
+max_peers: 3
+mode: testnet
