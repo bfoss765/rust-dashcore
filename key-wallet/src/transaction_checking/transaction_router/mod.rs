@@ -135,8 +135,21 @@ impl TransactionRouter {
                 AccountTypeToCheck::CoinJoin,
             ],
             TransactionType::AssetLock => vec![
+                // Fund-bearing accounts an asset lock can spend from. CoinJoin
+                // and the DashPay accounts are load-bearing here: only
+                // `check_core_transaction` marks a UTXO spent, and it scopes
+                // spend detection to these types, so a wallet that funds an
+                // asset lock (e.g. a shielded top-up) from CoinJoin or DashPay
+                // UTXOs would otherwise never have those inputs debited — the
+                // spent UTXOs are then counted in the balance indefinitely. The
+                // change output (a BIP44 address) IS credited, so the balance
+                // ends up high by exactly the CoinJoin/DashPay amount spent
+                // (dashpay/platform#4073, dashpay/dash-wallet#1507).
                 AccountTypeToCheck::StandardBIP44,
                 AccountTypeToCheck::StandardBIP32,
+                AccountTypeToCheck::CoinJoin,
+                AccountTypeToCheck::DashpayReceivingFunds,
+                AccountTypeToCheck::DashpayExternalAccount,
                 AccountTypeToCheck::IdentityRegistration,
                 AccountTypeToCheck::IdentityTopUp,
                 AccountTypeToCheck::IdentityTopUpNotBound,
