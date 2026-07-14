@@ -343,6 +343,16 @@ impl Default for GapLimitManager {
 mod tests {
     use super::*;
 
+    /// EXPERIMENT (866+851 gap-30): pins the compiled CoinJoin gap-limit value.
+    /// This build deliberately runs the narrower gap of 30 (not the dashj-parity
+    /// 100 from #868) to test on-device whether hash's #866+#851 fixes make
+    /// gap-30 viable on the heaviest wallet. If this assertion fails, someone
+    /// changed the constant and the experiment's premise no longer holds.
+    #[test]
+    fn coinjoin_gap_limit_pinned_at_30_for_experiment() {
+        assert_eq!(DEFAULT_COINJOIN_GAP_LIMIT, 30);
+    }
+
     #[test]
     fn test_gap_limit_basic() {
         let mut gap = GapLimit::new(20);
